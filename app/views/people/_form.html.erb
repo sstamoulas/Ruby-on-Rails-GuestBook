@@ -1,3 +1,6 @@
+<!-- 
+  
+-->
 <%= form_for(person) do |f| %>
   <% if person.errors.any? %>
     <div id="error_explanation">
@@ -13,7 +16,165 @@
 
   <div class="field">
     <%= f.label :name %>
+    <!-- modifies the name label -->
+    <%#= f.label :name, 'Your name' %>
     <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :secret %>
+    <%= f.text_field :secret %>
+  </div>
+
+  <div class="field">
+    <%= f.label :country %>
+    <%= f.select :country, [['Canada', 'Canada'], 
+                            ['Mexico', 'Mexico'], 
+                            ['United Kingdom', 'UK'], 
+                            ['United States of America', 'USA']] %>
+
+    <%# nations1 = { 'United States of America' => 'USA', 'Canada' => 'Canada', 'Mexico' => 'Mexico', 'United Kingdom' => 'UK' } %>
+
+    <%#= buttons(:person, :country, nations1) %>
+
+    <%# nations2 = { 'United States of America' => 'USA', 'Canada' => 'Canada', 'Mexico' => 'Mexico', 'United Kingdom' => 'UK' } %>
+
+    <%#= button_select(:person, :country, nations2) %>
+
+    <%# nations3 = { 'United States of America' => 'USA', 'Canada' => 'Canada', 'Mexico' => 'Mexico' } %>
+
+    <%#= button_select(:person, :country, nations3) %>
+
+
+    <!--
+
+      #:selected marks the current value of the field as selected. Otherwise, if :country is populated it will selec that value in the list
+      <%#= f.select :country, [['Canada', 'Canada'], 
+                              ['Mexico', 'Mexico'],
+                              ['United States of America', 'USA']],
+                              :selected => 'USA' %>
+
+
+      Or a list of radio buttons could have been created like so
+      if :country is populated, it will mark that radio button as checked="checked"
+
+      <fieldset>
+        <!--<legend>Country</legend>
+        <%#= f.radio_button :country, 'USA' %><%#= f.label "person_country_usa", "USA" %><br>
+        <%#= f.radio_button :country, 'Canada' %><%#= f.label "person_country_canada", "Canada" %><br>
+        <%#= f.radio_button :country, 'Mexico' %><%#= f.label "person_country_mexico", "Mexico" %><br>
+      </fieldset>
+
+      -->
+      <!--
+      Alternatively we could do...
+
+      <%# nations = { 'United States of America' => 'USA', 'Canada' => 'Canada', 'Mexico' => 'Mexico', 'United Kingdom' => 'UK' } %>
+
+      <fieldset>
+        <legend>Country</legend>
+        <%# list = nations.sort
+        list.each do |x| %>
+          <%#= f.radio_button :country, x[1] %>
+          <label for="<%#= ("person_country_" + x[1].downcase) %>">
+          <%#= x[0] %></label><br>
+        <%# end %>
+      </fieldset>
+    -->
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+    <!--
+      This will add a limit of columns and rows to the text area.
+      This works for any attribute you want to modify.
+    -->
+    <%#= f.text_area :description, cols:30, rows: 10 %>
+
+    <!-- 
+      This will mask the password.
+    -->
+    <%#= f.password_field :secret %>
+  </div>
+
+  <div class="field">
+    <%= f.label :can_send_email %>
+    <%= f.check_box :can_send_email %>
+    <%#= f.check_box :can_send_email, {class: 'email'}, "yes", "no" %>
+    <!-- 
+      This produces a checkbox with a class attirbute of email
+      <%#= f.check_box :can_send_email, class: 'email' %>
+
+      This produces a checkbox with a class attirbute of email and checking the box
+      <%#= f.check_box :can_send_email, {class: 'email', checked: 'checked'} %>
+
+      This produces a checkbox with a class attribute of email and return values of "yes" and "no"
+      Instead of 1 and 0
+      <%#= f.check_box :can_send_email, {class: 'email'}, "yes", "no" %>
+    -->
+  </div>
+
+  <div class="field">
+    <%= f.label :graduation_year %>
+    <%= f.number_field :graduation_year %>
+    <!-- Creates a hidden field -->
+    <%#= f.hidden_field :graduation_uear %>
+  </div>
+
+  <div class="field">
+    <%= f.label :body_temperature %>
+    <%= f.text_field :body_temperature %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= f.label :birthday %>
+    <%= f.date_select :birthday %>
+    <!--
+      Produces the same as a date_select and time_select combined
+      <%#= f.datetime_select :birthday %>
+
+      Arranges the ddl's in an order, default is :year, :month, :day
+      <%#= f.date_select :birthday, :order => [:day, :month, :year] %>
+
+      Marks the first year in the ddl, default is 5 years prior to current year
+      <%#= f.date_select :birthday, :start_year => 2000 %>
+
+      Marks the end year in the ddl, default is 5 years after the current year
+      <%#= f.date_select :birthday, :end_year => 2001 %>
+
+      Changes the month names into numbers
+      <%#= f.date_select :birthday, :use_month_numbers => true %>
+  
+      Removes the day field ddl
+      Can also use :discard_month, :discard_year
+      <%#= f.date_select :birthday, :discard_day => true %>
+      
+      Disables all the ddl's
+      <%#= f.date_select :birthday, :disabled => true %>
+
+      Marks nothing as selected in all ddl's
+      <%#= f.date_select :birthday, :include_blank => true %>
+    -->
+  </div>
+
+  <div class="field">
+    <%= f.label :favorite_time %>
+    <%= f.time_select :favorite_time %>
+    <!--
+      Includes seconds in the time_select, can also do :discard_hour, :discard_minute, and :discard_seconds
+      <%#= f.time_select :favorite_time, :include_seconds => true %>
+    -->
   </div>
 
   <div class="actions">
